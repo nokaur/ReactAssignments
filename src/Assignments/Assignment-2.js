@@ -4,26 +4,32 @@ function List() {
   const employee = [
     {
       Id: 1,
-      Name: "Novel",
-      Job: " Associate Consultant"
+      Name: "Charlie",
+      Job: "Janitor"
     },
     {
       Id: 2,
-      Name: "Kiran",
-      Job: "Govt Employee"
+      Name: "Mac",
+      Job: "Bouncer"
     },
     {
       Id: 3,
-      Name: "Sudhir",
-      Job: "Programmer"
+      Name: "Dee",
+      Job: "Aspiring Actress"
+    },
+    {
+      Id: 4,
+      Name: "Denise",
+      Job: "Bartender"
     }
   ];
 
   const emplist = employee.map((emp) => (
-    <table style={({ textAlign: "left" }, { width: "400px" })}>
+    <table className="table">
       <tr>
-        <td>{emp.Name}</td>
-        <td>{emp.Job}</td>
+        <td style={{ width: "160px" }}>{emp.Name}</td>
+
+        <td style={{ textAlign: "left" }}>{emp.Job}</td>
       </tr>
     </table>
   ));
@@ -36,7 +42,7 @@ function List() {
           <th>Job</th>
         </tr>
       </table>
-      <table className="table">
+      <table>
         <tr>
           <td>{emplist}</td>
         </tr>
