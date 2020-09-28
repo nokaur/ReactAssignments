@@ -1,11 +1,17 @@
 import React from "react";
 import "./styles.css";
+import StyleSheet from "./Assignments/MyStyleSheet.css";
+
+import Greet from "./Assignments/Assignment-1";
+import List from "./Assignments/Assignment-2";
 
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      {/* ASSIGMENT-1 */}
+      {/* <Greet /> */}
+      {/* ASSIGNMENT-2 */}
+      <List />
     </div>
   );
 }
