@@ -27,7 +27,8 @@ class AddEmployee extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emp: employee
+      emp: employee,
+      count: 4
       // Name: "",
       // Job: ""
     };
@@ -35,6 +36,7 @@ class AddEmployee extends Component {
     this.OnNameChange = this.OnNameChange.bind(this);
     this.OnJobChange = this.OnJobChange.bind(this);
     this.OnSubmit = this.OnSubmit.bind(this);
+    this.OnEmployeeDelete = this.OnEmployeeDelete.bind(this);
   }
 
   OnNameChange = (event) => {
@@ -47,10 +49,16 @@ class AddEmployee extends Component {
       Job: event.target.value
     });
   };
+  OnEmployeeDelete = (i) => {
+    let list = [...this.state.emp];
+    list.splice(i, 1);
+    this.setState({
+      emp: list
+    });
+  };
   OnSubmit = (event) => {
-    event.preventDefault();
     var row = {
-      Id: 8,
+      Id: this.state.count + 1,
       Name: this.state.Name,
       Job: this.state.Job
     };
@@ -60,17 +68,27 @@ class AddEmployee extends Component {
     //var newList=employee.map(e=>e)
     newList.push(row);
     this.setState({
-      emp: newList
+      emp: newList,
+      count: this.state.count + 1
     });
+    event.preventDefault();
   };
 
   render() {
-    const emplist = this.state.emp.map((emp) => (
+    const emplist = this.state.emp.map((emp, i) => (
       <table className="table">
-        <tr>
-          <td style={{ width: "160px" }}>{emp.Name}</td>
+        <tr key={i}>
+          <td style={{ width: "400px" }}>{emp.Name}</td>
 
-          <td style={{ textAlign: "left" }}>{emp.Job}</td>
+          <td style={({ textAlign: "left" }, { width: "500px" })}>{emp.Job}</td>
+          <td style={{ textAlign: "right" }}>
+            <button
+              onClick={(i) => this.OnEmployeeDelete(i)}
+              className="button"
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       </table>
     ));
@@ -81,7 +99,9 @@ class AddEmployee extends Component {
           <table className="table">
             <tr>
               <th>Name</th>
+              <th style={{ width: "100px" }}></th>
               <th>Job</th>
+              <th style={{ width: "183px" }}></th>
             </tr>
           </table>
           <table>
