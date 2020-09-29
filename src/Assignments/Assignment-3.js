@@ -1,12 +1,35 @@
 import React, { Component } from "react";
 
+var employee = [
+  {
+    Id: 1,
+    Name: "Charlie",
+    Job: "Janitor"
+  },
+  {
+    Id: 2,
+    Name: "Mac",
+    Job: "Bouncer"
+  },
+  {
+    Id: 3,
+    Name: "Dee",
+    Job: "Aspiring Actress"
+  },
+  {
+    Id: 4,
+    Name: "Denise",
+    Job: "Bartender"
+  }
+];
+
 class AddEmployee extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Id: "",
-      Name: "",
-      Job: ""
+      emp: employee
+      // Name: "",
+      // Job: ""
     };
 
     this.OnNameChange = this.OnNameChange.bind(this);
@@ -25,76 +48,24 @@ class AddEmployee extends Component {
     });
   };
   OnSubmit = (event) => {
-    let newEmp = {
-      // Id: "5",
+    event.preventDefault();
+    var row = {
+      Id: 8,
       Name: this.state.Name,
       Job: this.state.Job
     };
+
+    var newList = [...this.state.emp];
+
+    //var newList=employee.map(e=>e)
+    newList.push(row);
     this.setState({
-      // Name: [...this.state.Name, name],
-      // Job: [...this.state.Job, job]
-      employee: [...this.state.employee, newEmp]
+      emp: newList
     });
-    alert(`${this.state}`);
-    event.preventDefault();
   };
 
-  // const employee = [
-  //   {
-  //     Id: 1,
-  //     Name: "Charlie",
-  //     Job: "Janitor"
-  //   },
-  //   {
-  //     Id: 2,
-  //     Name: "Mac",
-  //     Job: "Bouncer"
-  //   },
-  //   {
-  //     Id: 3,
-  //     Name: "Dee",
-  //     Job: "Aspiring Actress"
-  //   },
-  //   {
-  //     Id: 4,
-  //     Name: "Denise",
-  //     Job: "Bartender"
-  //   }
-  // ];
-  // const emplist = employee.map((emp) => (
-  //   <table className="table">
-  //     <tr>
-  //       <td style={{ width: "160px" }}>{emp.Name}</td>
-
-  //       <td style={{ textAlign: "left" }}>{emp.Job}</td>
-  //     </tr>
-  //   </table>
-  // ));
-
   render() {
-    var employee = [
-      {
-        Id: 1,
-        Name: "Charlie",
-        Job: "Janitor"
-      },
-      {
-        Id: 2,
-        Name: "Mac",
-        Job: "Bouncer"
-      },
-      {
-        Id: 3,
-        Name: "Dee",
-        Job: "Aspiring Actress"
-      },
-      {
-        Id: 4,
-        Name: "Denise",
-        Job: "Bartender"
-      }
-    ];
-    const emplist = employee.map((emp) => (
+    const emplist = this.state.emp.map((emp) => (
       <table className="table">
         <tr>
           <td style={{ width: "160px" }}>{emp.Name}</td>
@@ -126,6 +97,7 @@ class AddEmployee extends Component {
               type="text"
               style={{ width: "300px" }}
               onChange={this.OnNameChange}
+              value={this.state.Name}
             />
             <br />
             <br />
@@ -135,6 +107,7 @@ class AddEmployee extends Component {
               type="text"
               style={{ width: "300px" }}
               onChange={this.OnJobChange}
+              Value={this.state.Job}
             />
             <br />
             <br />
