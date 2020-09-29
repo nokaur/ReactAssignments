@@ -2,21 +2,25 @@ import React, { Component } from "react";
 
 var employee = [
   {
+    Index: Math.random(),
     Id: 1,
     Name: "Charlie",
     Job: "Janitor"
   },
   {
+    Index: Math.random(),
     Id: 2,
     Name: "Mac",
     Job: "Bouncer"
   },
   {
+    Index: Math.random(),
     Id: 3,
     Name: "Dee",
     Job: "Aspiring Actress"
   },
   {
+    Index: Math.random(),
     Id: 4,
     Name: "Denise",
     Job: "Bartender"
@@ -49,15 +53,15 @@ class AddEmployee extends Component {
       Job: event.target.value
     });
   };
-  OnEmployeeDelete = (i) => {
-    let list = [...this.state.emp];
-    list.splice(i, 1);
+
+  OnEmployeeDelete = (record) => {
     this.setState({
-      emp: list
+      emp: this.state.emp.filter((r) => r !== record)
     });
   };
   OnSubmit = (event) => {
     var row = {
+      Index: Math.random(),
       Id: this.state.count + 1,
       Name: this.state.Name,
       Job: this.state.Job
@@ -75,15 +79,15 @@ class AddEmployee extends Component {
   };
 
   render() {
-    const emplist = this.state.emp.map((emp, i) => (
+    const emplist = this.state.emp.map((emp) => (
       <table className="table">
-        <tr key={i}>
+        <tr key={emp.Index}>
           <td style={{ width: "400px" }}>{emp.Name}</td>
 
           <td style={({ textAlign: "left" }, { width: "500px" })}>{emp.Job}</td>
           <td style={{ textAlign: "right" }}>
             <button
-              onClick={(i) => this.OnEmployeeDelete(i)}
+              onClick={(i) => this.OnEmployeeDelete(emp)}
               className="button"
             >
               Delete
